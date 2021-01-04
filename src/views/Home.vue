@@ -1,23 +1,23 @@
 <template>
   <span>
-    <v-app-bar app dark color="orange">
+    <v-app-bar app dark color="secondary">
       <v-toolbar-title>Matt Smith Tutoring</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn text>SIGN IN</v-btn>
-      <v-btn color="light-blue">BOOK NOW</v-btn>
+      <v-btn color="primary">BOOK NOW</v-btn>
     </v-app-bar>
     <splash></splash>
-    <div class="orange lighten-3">
-      <mcs-header>About Me</mcs-header>
+    <div class="accent lighten-4">
       <v-container>
+        <mcs-header>About Me</mcs-header>
         <v-row>
-          <v-col cols="8" offset="2" class="dark text-center text-h5">
-            Hi! I'm Mr. Smith, a certified math teacher and IT professional who
-            helps students reach their full potentials in the subjects they
-            struggle with the most. My approach is analytical: break down a
-            problem, whether it be solving an equation or translating a
-            sentence, into pieces and build on the fundamentals to piece the
-            solution together. <br /><br />
+          <v-col cols="12" class="dark text-center text-h5">
+            Hi! I'm Mr. Smith, a Princeton University-trained mathematician and
+            certified math teacher who helps students reach their full potential
+            in the subjects they struggle with the most. My approach is
+            analytical: break down a problem, whether it be solving an equation
+            or translating a sentence, into pieces and build on the fundamentals
+            to piece the solution together. <br /><br />
             I'll meet you where you're at and help you reach where you need to
             be. Through consistent effort, you'll build confidence and overcome
             the struggle. See below for more details on my teaching philosophy.
@@ -27,12 +27,12 @@
         </v-row>
       </v-container>
     </div>
-    <div class="cyan lighten-3">
-      <mcs-header>Subjects I Tutor</mcs-header>
+    <div class="primary lighten-3">
       <v-container>
-        <v-row>
+        <mcs-header>Subjects I Tutor</mcs-header>
+        <v-row class="pt-2">
           <v-col cols="3">
-            <tutor-subject subject="Mathematics" color="red">
+            <tutor-subject subject="Mathematics" color="item1">
               Any subject from 6th grade through college, including:
               <ul>
                 <li>Pre-Algebra</li>
@@ -50,7 +50,7 @@
             <tutor-subject
               subject="Computer
           Science"
-              color="blue"
+              color="item2"
             >
               Both programming and college-level theory. Experienced in the
               following languages:
@@ -73,7 +73,7 @@
             </tutor-subject>
           </v-col>
           <v-col cols="3">
-            <tutor-subject subject="Physics" color="orange">
+            <tutor-subject subject="Physics" color="item3">
               Introductory Physics, including material covered in:
               <ul>
                 <li>AP Physics B</li>
@@ -84,7 +84,7 @@
             </tutor-subject>
           </v-col>
           <v-col cols="3">
-            <tutor-subject subject="Japanese" color="green">
+            <tutor-subject subject="Japanese" color="item4">
               Beginner to Intermediate Japanese, such as material covered in:
               <ul>
                 <li>Genki 1 & 2</li>
@@ -96,139 +96,66 @@
         </v-row>
       </v-container>
     </div>
-    <div class="purple lighten-4">
-      <mcs-header>My Philosophy</mcs-header>
+    <div class="secondary lighten-4">
       <v-container>
-        <blurb header="Perseverence" color="red">
+        <mcs-header>My Philosophy</mcs-header>
+        <v-row>
+          <v-col cols="12" class="dark text-center text-h5">
+            I believe subjects like Math can teach so much more than just the
+            math itself. Four transferable skills come to mind that apply to all
+            aspects of life:
+          </v-col>
+        </v-row>
+        <blurb header="Perseverence" color="item1">
           By embracing and working through difficult problems, we learn to
-          <span class="red--text font-weight-bold">persevere</span> through the
-          challenge and not fear solving new problems with unknown answers.
+          <span class="item1--text font-weight-bold">persevere</span> through
+          the challenge and not fear solving new problems with unknown answers.
         </blurb>
-        <blurb header="Curiosity" color="blue" right>
+        <blurb header="Curiosity" color="item2" right>
           As we become more comfortable with the subjects that we struggle with,
           it unlocks our native
-          <span class="blue--text font-weight-bold">curiosity</span> and puts us
-          in a state where we are ready to learn and discover new things.
+          <span class="item2--text font-weight-bold">curiosity</span> and puts
+          us in a state where we are ready to learn and discover new things.
         </blurb>
         <blurb
           header="Analysis +
       Synthesis"
-          color="orange"
+          color="item3"
         >
           Learning to properly
-          <span class="orange--text font-weight-bold">analyze</span> a given
+          <span class="item3--text font-weight-bold">analyze</span> a given
           problem trains our brains to be detail-oriented, while learning to
-          <span class="orange--text font-weight-bold">synthesize</span> the
+          <span class="item3--text font-weight-bold">synthesize</span> the
           results helps us to keep sight of the big picture in the process.
         </blurb>
-        <blurb header="Creativity" color="green" right>
+        <blurb header="Creativity" color="item4" right>
           We will encounter obstacles in solving any kind of problem, which
           gives us the opportunity to learn how to
-          <span class="green--text font-weight-bold">creatively</span> navigate
+          <span class="item4--text font-weight-bold">creatively</span> navigate
           around those obstacles by reducing new problems to things we already
           know.
         </blurb>
       </v-container>
     </div>
-    <div>
-      <v-container class="pt-8">
-        <v-card
-          outlined
-          class="py-4"
-          style="border-width: 10px; border-color: black"
-        >
-          <v-row>
-            <v-col cols="4">
-              <div class="d-flex justify-end align-end" style="height: 12rem">
-                <v-icon size="8rem" color="black">
-                  mdi-arrow-top-right-bottom-left-bold
-                </v-icon>
-              </div>
-            </v-col>
-            <v-col cols="4">
-              <v-card
-                class="d-flex justify-center align-center"
-                height="12rem"
-                color="purple lighten-1"
-                dark
-              >
-                <v-card-title class="text-center text-h4 font-weight-bold">
-                  Embrace<br />
-                  the Challenge
-                </v-card-title>
-              </v-card>
-            </v-col>
-            <v-col cols="4">
-              <div class="d-flex justify-start align-end" style="height: 12rem">
-                <v-icon size="8rem" color="black">
-                  mdi-arrow-top-left-bottom-right-bold
-                </v-icon>
-              </div>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="4" offset="1">
-              <v-card
-                class="d-flex justify-center align-center"
-                height="12rem"
-                color="yellow darken-3"
-                dark
-              >
-                <v-card-title class="text-center text-h4 font-weight-bold">
-                  Build<br />
-                  Confidence
-                </v-card-title>
-              </v-card>
-            </v-col>
-            <v-col cols="2">
-              <div
-                class="d-flex justify-center align-center"
-                style="height: 12rem"
-              >
-                <v-icon size="8rem" color="black">
-                  mdi-arrow-left-right-bold
-                </v-icon>
-              </div>
-            </v-col>
-            <v-col cols="4">
-              <v-card
-                class="d-flex justify-center align-center"
-                height="12rem"
-                color="red darken-2"
-                dark
-              >
-                <v-card-title class="text-center text-h4 font-weight-bold">
-                  Overcome<br />
-                  the Fear
-                </v-card-title>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-card>
-        <v-row dense>
-          <v-col cols="12">
-            <div class="d-flex justify-center align-center">
-              <v-icon size="8rem" color="black"> mdi-arrow-down-bold </v-icon>
-            </div>
-          </v-col>
-        </v-row>
+    <div class="info lighten-4">
+      <v-container>
+        <mcs-header>The Tutoring Cycle</mcs-header>
         <v-row>
-          <v-col cols="6" offset="3">
-            <v-card
-              class="d-flex justify-center align-center"
-              height="8rem"
-              color="cyan darken-1"
-              dark
-            >
-              <v-card-title class="text-center text-h4 font-weight-bold">
-                Sharpen the Mind
-              </v-card-title>
-            </v-card>
+          <v-col cols="12" class="dark text-center text-h5">
+            Tutoring is most effective when done on a regular basis. The
+            repeated act of embracing challenges in a safe environment helps to
+            build confidence with the subject and overcome the fear of failure.
+            Each of these enhances the other in a feedback loop I call the
+            <span class="font-weight-bold">Tutoring Cycle</span>. Altogether,
+            the cycle helps us reach the ultimate goal of sharpening the mind
+            overall and setting us up to be successful in any challenges we face
+            (which, naturally, will also lead to better grades in school).
           </v-col>
         </v-row>
+        <tutor-cycle></tutor-cycle>
       </v-container>
     </div>
-    <div class="green lighten-3">
+    <div class="success lighten-3">
       <v-container>
         <v-row>
           <v-col cols="8" offset="2" class="dark text-center text-h4">
@@ -242,7 +169,7 @@
               block
               x-large
               dark
-              color="light-blue"
+              color="primary"
               width="100%"
               class="text-h6"
             >
@@ -252,6 +179,11 @@
         </v-row>
       </v-container>
     </div>
+    <v-footer color="secondary" dark class="text-h6">
+      Contact me: mrsmith@website.com
+      <v-spacer></v-spacer>
+      &copy; 2021 Matt Smith Tutoring
+    </v-footer>
   </span>
 </template>
 
@@ -259,12 +191,14 @@
 import Blurb from '../components/Blurb.vue'
 import McsHeader from '../components/McsHeader.vue'
 import Splash from '../components/Splash.vue'
+import TutorCycle from '../components/TutorCycle.vue'
 import TutorSubject from '../components/TutorSubject.vue'
 export default {
   components: {
     Blurb,
     McsHeader,
     Splash,
+    TutorCycle,
     TutorSubject
   },
   name: 'Home'
