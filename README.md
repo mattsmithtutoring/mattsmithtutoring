@@ -1,24 +1,16 @@
 # mattsmithtutoring
 
-## Project setup
-```
-yarn install
-```
+## Set up the development environment
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+I use [Vagrant](https://www.vagrantup.com/) to run a local VM for my dev environment. Vagrant requires a backend VM software; I recommend [VirtualBox](https://www.virtualbox.org/). Follow these steps to set up the dev environment:
 
-### Compiles and minifies for production
-```
-yarn build
-```
+1. Download and install Virtualbox.
+1. Download and install Vagrant.
+1. Clone this repository down to your local machine.
+1. Navigate to the cloned repository in the terminal.
+1. Run `vagrant up`.
+1. Once the command has completed, run `vagrant ssh` to ssh into the virtual machine.
+1. Navigate to the directory in the VM linked to the repository: `cd /mattsmithtutoring`
+1. Run the development server: `yarn serve`
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Now you should be able to access the web page at `http://localhost:8080`
