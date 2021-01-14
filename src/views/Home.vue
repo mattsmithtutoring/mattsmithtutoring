@@ -7,7 +7,7 @@
       <v-btn color="primary">BOOK NOW</v-btn>
     </v-app-bar>
     <splash></splash>
-    <div class="accent lighten-4">
+    <div class="primary lighten-5">
       <v-container>
         <mcs-header>About Me</mcs-header>
         <v-row>
@@ -27,7 +27,7 @@
         </v-row>
       </v-container>
     </div>
-    <div class="primary lighten-3">
+    <div class="primary lighten-4">
       <v-container>
         <mcs-header>Subjects I Tutor</mcs-header>
         <v-row class="pt-2">
@@ -96,26 +96,27 @@
         </v-row>
       </v-container>
     </div>
-    <div class="secondary lighten-4">
+    <div class="primary lighten-3">
       <v-container>
         <mcs-header>My Philosophy</mcs-header>
         <v-row>
           <v-col cols="12" class="dark text-center text-h5">
             I believe subjects like Math can teach so much more than just the
-            math itself. Four transferable skills come to mind that apply to all
-            aspects of life:
+            math itself. These four transferable skills apply to all aspects of
+            life:
           </v-col>
         </v-row>
-        <blurb header="Perseverence" color="item1">
+        <blurb header="Perseverance" color="item1">
           By embracing and working through difficult problems, we learn to
           <span class="item1--text font-weight-bold">persevere</span> through
           the challenge and not fear solving new problems with unknown answers.
         </blurb>
         <blurb header="Curiosity" color="item2" right>
           As we become more comfortable with the subjects that we struggle with,
-          it unlocks our native
-          <span class="item2--text font-weight-bold">curiosity</span> and puts
-          us in a state where we are ready to learn and discover new things.
+          our natural
+          <span class="item2--text font-weight-bold">curiosity</span> is
+          unlocked and puts us in a state where we are ready to learn and
+          discover new things.
         </blurb>
         <blurb
           header="Analysis +
@@ -137,7 +138,7 @@
         </blurb>
       </v-container>
     </div>
-    <div class="info lighten-4">
+    <div class="primary lighten-2 pb-8">
       <v-container>
         <mcs-header>The Tutoring Cycle</mcs-header>
         <v-row>
@@ -148,14 +149,14 @@
             Each of these enhances the other in a feedback loop I call the
             <span class="font-weight-bold">Tutoring Cycle</span>. Altogether,
             the cycle helps us reach the ultimate goal of sharpening the mind
-            overall and setting us up to be successful in any challenges we face
+            overall and sets us up to be successful in any challenges we face
             (which, naturally, will also lead to better grades in school).
           </v-col>
         </v-row>
         <tutor-cycle></tutor-cycle>
       </v-container>
     </div>
-    <div class="success lighten-3">
+    <div class="accent lighten-5">
       <v-container>
         <v-row>
           <v-col cols="8" offset="2" class="dark text-center text-h4">

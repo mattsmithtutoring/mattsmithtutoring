@@ -4,17 +4,20 @@
       <v-container
         elevation-24
         class="mb-16"
-        style="background: rgba(96, 125, 139, 0.7)"
+        style="background: rgba(96, 125, 139, 0.9)"
       >
-        <div class="text-h1 font-weight-black text-center primary--text">
+        <div
+          class="text-h1 font-weight-black text-center primary--text text--lighten-1"
+          style="font-size: 5rem !important"
+        >
           THE STRUGGLE IS REAL
         </div>
-        <div class="text-h2 font-weight-black text-center mb-3 accent--text">
-          BUT YOU CAN DO IT
+        <div class="text-h1 font-weight-black text-center mb-3 accent--text">
+          BUT YOU CAN DO IT!
         </div>
         <div class="text-h4 font-weight-bold text-center white--text px-16">
-          Learn to embrace the challenge, build confidence, overcome the fear,
-          and sharpen the mind all while improving your grades.
+          Learn to embrace challenge, build confidence, overcome fear, and
+          sharpen the mind&mdash;all while improving your grades.
         </div>
       </v-container>
       <v-container>

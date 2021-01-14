@@ -22,7 +22,7 @@
           >
             <v-card-title class="text-center text-h4 font-weight-bold">
               Embrace<br />
-              the Challenge
+              Challenge
             </v-card-title>
           </v-card>
         </v-col>
@@ -64,7 +64,7 @@
           >
             <v-card-title class="text-center text-h4 font-weight-bold">
               Overcome<br />
-              the Fear
+              Fear
             </v-card-title>
           </v-card>
         </v-col>
