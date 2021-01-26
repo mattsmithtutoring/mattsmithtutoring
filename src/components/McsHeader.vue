@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-h2 font-weight-bold text-center pt-4">
+    <div class="text-h5 text-sm-h4 text-md-h3 text-lg-h2 font-weight-bold text-center pt-4">
       <slot></slot>
     </div>
     <div class="text-h6 text-center pb-2" v-if="subheader">

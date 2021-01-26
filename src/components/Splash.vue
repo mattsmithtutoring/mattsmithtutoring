@@ -1,33 +1,29 @@
 <template>
   <v-container fluid fill-height class="splash" style="max-height: 100vh">
     <v-layout justify-center align-center column pa-5>
-      <v-container
-        elevation-24
-        class="mb-16"
-        style="background: rgba(96, 125, 139, 0.9)"
-      >
+      <v-container elevation-24 class="mb-16" style="background: rgba(96, 125, 139, 0.9)">
         <div
-          class="text-h1 font-weight-black text-center primary--text text--lighten-1"
-          style="font-size: 5rem !important"
+          class="text-h4 text-sm-h3 text-md-h2 text-lg-h1 font-weight-black text-center primary--text text--lighten-1"
         >
           THE STRUGGLE IS REAL
         </div>
-        <div class="text-h1 font-weight-black text-center mb-3 accent--text">
+        <div class="text-h4 text-sm-h3 text-md-h2 text-lg-h1 font-weight-black text-center mb-3 accent--text">
           BUT YOU CAN DO IT!
         </div>
-        <div class="text-h4 font-weight-bold text-center white--text px-16">
-          Learn to embrace challenge, build confidence, overcome fear, and
-          sharpen the mind&mdash;all while improving your grades.
+        <div class="text-h6 text-md-h5 text-lg-h4 font-weight-bold text-center white--text px-4 px-md-16">
+          Learn to embrace challenge, build confidence, overcome fear, and sharpen the mind&mdash;all while improving
+          your grades.
         </div>
       </v-container>
-      <v-container>
-        <div
-          class="elevation-12 mx-8 px-8 py-4"
-          style="background: rgba(96, 125, 139, 0.7)"
-        >
-          <div class="mt-n12 ml-n8" style="position: absolute; fill: #607d8b">
+      <v-container v-if="$vuetify.breakpoint.md">
+        <div class="elevation-12 mx-8 px-8 py-4" style="background: rgba(96, 125, 139, 0.7)">
+          <div
+            class="ml-n8"
+            :class="$vuetify.breakpoint.lg ? 'mt-n12' : 'mt-n10'"
+            style="position: absolute; fill: #607d8b"
+          >
             <svg
-              width="12rem"
+              :width="$vuetify.breakpoint.lg ? '168px' : '136px'"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
               version="1.1"
@@ -41,7 +37,7 @@
           </div>
           <v-carousel height="10rem" show-arrows-on-hover hide-delimiters cycle>
             <v-carousel-item
-              class="text-h4 font-weight-bold white--text px-24"
+              class="text-h5 text-lg-h4 font-weight-bold white--text px-24"
               v-for="testimonial in testimonials"
               :key="testimonial.text"
               transition="fade-transition"
@@ -51,10 +47,7 @@
                 <div style="position: absolute">
                   {{ testimonial.text }}
                 </div>
-                <div
-                  class="d-flex align-end justify-end"
-                  style="position: absolute; width: 100%; height: 100%"
-                >
+                <div class="d-flex align-end justify-end" style="position: absolute; width: 100%; height: 100%">
                   - {{ testimonial.attribution }}
                 </div>
               </div>
@@ -62,7 +55,7 @@
           </v-carousel>
         </div>
       </v-container>
-      <v-btn fab class="mt-5 accent" @click="downArrowClick">
+      <v-btn fab class="mt-5 accent" @click="downArrowClick" v-if="$vuetify.breakpoint.mdAndUp">
         <v-icon large color="white">mdi-chevron-down</v-icon>
       </v-btn>
     </v-layout>
