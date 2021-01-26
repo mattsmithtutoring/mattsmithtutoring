@@ -1,36 +1,138 @@
 <template>
-  <v-form v-model="valid">
+  <v-form v-model="valid" ref="form" @submit.prevent="sendForm" lazy-validation>
     <v-card class="pa-8">
       <v-card-title>Inquiry Form</v-card-title>
       <v-card-subtitle>
-        Please submit the below information and I will get back to you within 24 hours by email.
+        Please submit the below information and I will get back to you within 24 hours by email. The first lesson is
+        free!
       </v-card-subtitle>
       <v-card-text>
         <div class="mb-8">
           <div class="text-h6 black--text">Student Information</div>
-          <v-text-field v-model="student.firstname" label="First name" required></v-text-field>
-          <v-text-field v-model="student.lastname" label="Last name" required></v-text-field>
-          <v-text-field v-model="student.age" label="Age" required></v-text-field>
-          <v-text-field v-model="student.email" label="Email Address" required></v-text-field>
+          <v-row>
+            <v-col cols="5">
+              <v-text-field
+                v-model="student.firstname"
+                label="First name"
+                :rules="[rules.required]"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="5">
+              <v-text-field
+                v-model="student.lastname"
+                label="Last name"
+                :rules="[rules.required]"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="2">
+              <v-text-field
+                v-model="student.age"
+                label="Age"
+                maxlength="3"
+                type="number"
+                min="10"
+                max="120"
+                :rules="[rules.required, rules.ageRange]"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="5">
+              <v-text-field
+                v-model="student.email"
+                label="Email Address"
+                :rules="[rules.required, rules.email]"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+          </v-row>
         </div>
         <div class="my-8">
           <div class="text-h6 black--text">Parent/Gardian Information</div>
-          <div class="text-subtitle-1">Required if student is under 18 years old</div>
-          <v-text-field v-model="parent.firstname" label="First name" required></v-text-field>
-          <v-text-field v-model="parent.lastname" label="Last name" required></v-text-field>
-          <v-text-field v-model="parent.email" label="Email Address" required></v-text-field>
+          <div class="text-subtitle-2">Required if student is under 18 years old</div>
+          <v-row>
+            <v-col cols="5">
+              <v-text-field
+                v-model="parent.firstname"
+                label="First name"
+                :rules="[rules.requiredIfUnder18]"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="5">
+              <v-text-field
+                v-model="parent.lastname"
+                label="Last name"
+                :rules="[rules.requiredIfUnder18]"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="5">
+              <v-text-field
+                v-model="parent.email"
+                label="Email Address"
+                :rules="[rules.requiredIfUnder18, rules.emailIfUnder18]"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+          </v-row>
         </div>
         <div class="mt-8">
           <div class="text-h6 black--text">Subject</div>
-          <v-select v-model="subject" :items="subjects" label="Subject" required @change="setCourse"></v-select>
-          <v-text-field v-model="otherSubjectDescription" label="Subject" v-if="subject === 'Other'"></v-text-field>
-          <v-select v-model="course" :items="coursesBySubject" label="Course" required></v-select>
-          <v-text-field v-model="otherCourseDescription" label="Course" v-if="course === 'Other'"></v-text-field>
+          <v-row>
+            <v-col cols="5">
+              <v-select
+                v-model="subject"
+                :items="subjects"
+                label="Subject"
+                :rules="[rules.required]"
+                @change="setCourse"
+                :disabled="sendingForm"
+              ></v-select>
+            </v-col>
+            <v-col cols="5">
+              <v-text-field
+                v-model="otherSubjectDescription"
+                label="Subject"
+                v-if="subject === 'Other'"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="5">
+              <v-select
+                v-model="course"
+                :items="coursesBySubject"
+                label="Course"
+                :rules="[rules.required]"
+                v-if="coursesBySubject"
+                :disabled="sendingForm"
+              ></v-select>
+            </v-col>
+            <v-col cols="5">
+              <v-text-field
+                v-model="otherCourseDescription"
+                label="Course"
+                v-if="course === 'Other'"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </div>
+        <div class="mt-8">
+          <div class="text-h6 black--text">(Optional) Additional Notes/Comments</div>
+          <v-textarea outlined no-resize rows="4" :disabled="sendingForm"></v-textarea>
         </div>
       </v-card-text>
       <v-card-actions>
-        <v-btn class="primary">Submit</v-btn>
-        <v-btn class="secondary">Cancel</v-btn>
+        <v-btn class="primary" type="submit" :disabled="sendingForm" :loading="sendingForm">Submit</v-btn>
+        <v-btn class="secondary" @click="$emit('closeDialog')" :disabled="sendingForm">Cancel</v-btn>
       </v-card-actions>
     </v-card>
   </v-form>
@@ -62,7 +164,15 @@ export default {
       japanese: ['Beginner', 'Intermediate', 'Other'],
       other: ['Other']
     },
-    otherCourseDescription: ''
+    otherCourseDescription: '',
+    rules: {
+      required: true,
+      requiredIfUnder18: true,
+      email: true,
+      emailIfUnder18: true,
+      ageRange: true
+    },
+    sendingForm: false
   }),
   computed: {
     coursesBySubject: function () {
@@ -79,6 +189,29 @@ export default {
     setCourse: function () {
       if (this.subject === 'Other') this.course = 'Other'
       else this.course = null
+    },
+    activateRules() {
+      this.rules.required = (v) => !!v || 'Required'
+      this.rules.requiredIfUnder18 = (v) => parseInt(this.student.age) >= 18 || !!v || 'Required'
+      this.rules.email = (v) => {
+        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        return pattern.test(v) || 'Invalid e-mail'
+      }
+      this.rules.emailIfUnder18 = (v) => {
+        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        return parseInt(this.student.age) >= 18 || pattern.test(v) || 'Invalid e-mail'
+      }
+      this.rules.ageRange = (v) => {
+        return (parseInt(v) >= 10 && parseInt(v) <= 120) || 'Invalid age'
+      }
+    },
+    sendForm(e) {
+      this.activateRules()
+      this.$nextTick(() => {
+        if (this.$refs.form.validate()) {
+          this.sendingForm = true
+        }
+      })
     }
   }
 }
