@@ -3,12 +3,11 @@
     <v-app-bar app dark color="secondary">
       <v-toolbar-title>Matt Smith Tutoring</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text>SIGN IN</v-btn>
-      <v-dialog v-model="dialog" width="500">
+      <v-dialog v-model="dialog" width="900" persistent>
         <template v-slot:activator="{ on, attrs }">
           <v-btn color="primary" v-bind="attrs" v-on="on">BOOK NOW</v-btn>
         </template>
-        <booking-form></booking-form>
+        <booking-form @closeDialog="dialog = false"></booking-form>
       </v-dialog>
     </v-app-bar>
     <splash></splash>
@@ -16,7 +15,7 @@
       <v-container>
         <mcs-header>About Me</mcs-header>
         <v-row>
-          <v-col cols="12" class="dark text-center text-h5">
+          <v-col cols="12" class="dark text-center text-body-1 text-md-h6">
             Hi! I'm Mr. Smith, a Princeton University-trained mathematician and certified math teacher who helps
             students reach their full potential in the subjects they struggle with the most. My approach is analytical:
             break down a problem, whether it be solving an equation or translating a sentence, into pieces and build on
@@ -32,7 +31,7 @@
       <v-container>
         <mcs-header>Subjects I Tutor</mcs-header>
         <v-row class="pt-2">
-          <v-col cols="3">
+          <v-col cols="12" sm="6" lg="3">
             <tutor-subject subject="Mathematics" color="item1">
               Any subject from 6th grade through college, including:
               <ul>
@@ -47,7 +46,7 @@
               </ul>
             </tutor-subject>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" sm="6" lg="3">
             <tutor-subject
               subject="Computer
           Science"
@@ -67,7 +66,7 @@
               </a>
             </tutor-subject>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" sm="6" lg="3">
             <tutor-subject subject="Physics" color="item3">
               Introductory Physics, including material covered in:
               <ul>
@@ -78,7 +77,7 @@
               </ul>
             </tutor-subject>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" sm="6" lg="3">
             <tutor-subject subject="Japanese" color="item4">
               Beginner to Intermediate Japanese, such as material covered in:
               <ul>
@@ -95,7 +94,7 @@
       <v-container>
         <mcs-header>My Philosophy</mcs-header>
         <v-row>
-          <v-col cols="12" class="dark text-center text-h5">
+          <v-col cols="12" class="dark text-center text-body-1 text-md-h6">
             I believe subjects like Math can teach so much more than just the math itself. These four transferable
             skills apply to all aspects of life:
           </v-col>
@@ -131,7 +130,7 @@
       <v-container>
         <mcs-header>The Tutoring Cycle</mcs-header>
         <v-row>
-          <v-col cols="12" class="dark text-center text-h5">
+          <v-col cols="12" class="dark text-center text-body-1 text-md-h6">
             Tutoring is most effective when done on a regular basis. The repeated act of embracing challenges in a safe
             environment helps to build confidence with the subject and overcome the fear of failure. Each of these
             enhances the other in a feedback loop I call the
@@ -146,7 +145,7 @@
     <div class="accent lighten-5">
       <v-container>
         <v-row>
-          <v-col cols="8" offset="2" class="dark text-center text-h4">
+          <v-col cols="12" sm="10" offset-sm="1" md="8" offset-md="2" class="dark text-center text-h5 text-md-h4">
             Learn to appreciate the subjects you struggle with while improving your grades
           </v-col>
         </v-row>
@@ -157,8 +156,8 @@
         </v-row>
       </v-container>
     </div>
-    <v-footer color="secondary" dark class="text-h6">
-      Contact me: mrsmith@website.com
+    <v-footer color="secondary" dark class="text-caption text-md-body-1">
+      Contact me: <a href="#" class="white--text pl-2">mattsmith@mattsmithtutoring.com</a>
       <v-spacer></v-spacer>
       &copy; 2021 Matt Smith Tutoring
     </v-footer>
@@ -181,6 +180,9 @@ export default {
     TutorSubject,
     BookingForm
   },
+  data: () => ({
+    dialog: false
+  }),
   name: 'Home'
 }
 </script>
