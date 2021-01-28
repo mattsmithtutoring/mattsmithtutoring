@@ -133,12 +133,19 @@
       <v-card-actions>
         <v-btn class="primary" type="submit" :disabled="sendingForm" :loading="sendingForm">Submit</v-btn>
         <v-btn class="secondary" @click="$emit('closeDialog')" :disabled="sendingForm">Cancel</v-btn>
+        <div class="error--text pl-4" v-if="showSubmitError">
+          There was an error submitting the form. Please contact me directly at mattsmith@mattsmithtutoring.com.
+        </div>
       </v-card-actions>
     </v-card>
   </v-form>
 </template>
 
 <script>
+import axios from 'axios'
+if (process.env.NODE_ENV === 'production') axios.defaults.baseURL = 'https://mattsmithtutoring.com/.netlify/functions'
+else axios.defaults.baseURL = 'http://localhost:8888/.netlify/functions'
+
 export default {
   data: () => ({
     valid: false,
@@ -172,7 +179,8 @@ export default {
       emailIfUnder18: true,
       ageRange: true
     },
-    sendingForm: false
+    sendingForm: false,
+    showSubmitError: false
   }),
   computed: {
     coursesBySubject: function () {
@@ -210,6 +218,21 @@ export default {
       this.$nextTick(() => {
         if (this.$refs.form.validate()) {
           this.sendingForm = true
+          this.showSubmitError = false
+          axios
+            .post('/send-email', {
+              some: 'value',
+              lives: 'here'
+            })
+            .then((response) => {
+              console.log(response)
+            })
+            .catch((error) => {
+              this.sendingForm = false
+              this.showSubmitError = true
+              console.log(error)
+            })
+          // TODO: Set up Axios with API call to Netlify function at /.netlify/functions/send-email
         }
       })
     }
