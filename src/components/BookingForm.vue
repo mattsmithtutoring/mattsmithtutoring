@@ -12,7 +12,7 @@
           <v-row>
             <v-col cols="5">
               <v-text-field
-                v-model="student.firstname"
+                v-model="formData.student.firstname"
                 label="First name"
                 :rules="[rules.required]"
                 :disabled="sendingForm"
@@ -20,7 +20,7 @@
             </v-col>
             <v-col cols="5">
               <v-text-field
-                v-model="student.lastname"
+                v-model="formData.student.lastname"
                 label="Last name"
                 :rules="[rules.required]"
                 :disabled="sendingForm"
@@ -28,7 +28,7 @@
             </v-col>
             <v-col cols="2">
               <v-text-field
-                v-model="student.age"
+                v-model="formData.student.age"
                 label="Age"
                 maxlength="3"
                 type="number"
@@ -42,7 +42,7 @@
           <v-row>
             <v-col cols="5">
               <v-text-field
-                v-model="student.email"
+                v-model="formData.student.email"
                 label="Email Address"
                 :rules="[rules.required, rules.email]"
                 :disabled="sendingForm"
@@ -56,7 +56,7 @@
           <v-row>
             <v-col cols="5">
               <v-text-field
-                v-model="parent.firstname"
+                v-model="formData.parent.firstname"
                 label="First name"
                 :rules="[rules.requiredIfUnder18]"
                 :disabled="sendingForm"
@@ -64,7 +64,7 @@
             </v-col>
             <v-col cols="5">
               <v-text-field
-                v-model="parent.lastname"
+                v-model="formData.parent.lastname"
                 label="Last name"
                 :rules="[rules.requiredIfUnder18]"
                 :disabled="sendingForm"
@@ -74,7 +74,7 @@
           <v-row>
             <v-col cols="5">
               <v-text-field
-                v-model="parent.email"
+                v-model="formData.parent.email"
                 label="Email Address"
                 :rules="[rules.requiredIfUnder18, rules.emailIfUnder18]"
                 :disabled="sendingForm"
@@ -87,7 +87,7 @@
           <v-row>
             <v-col cols="5">
               <v-select
-                v-model="subject"
+                v-model="formData.subject"
                 :items="subjects"
                 label="Subject"
                 :rules="[rules.required]"
@@ -97,9 +97,9 @@
             </v-col>
             <v-col cols="5">
               <v-text-field
-                v-model="otherSubjectDescription"
+                v-model="formData.otherSubjectDescription"
                 label="Subject"
-                v-if="subject === 'Other'"
+                v-if="formData.subject === 'Other'"
                 :disabled="sendingForm"
               ></v-text-field>
             </v-col>
@@ -107,7 +107,7 @@
           <v-row>
             <v-col cols="5">
               <v-select
-                v-model="course"
+                v-model="formData.course"
                 :items="coursesBySubject"
                 label="Course"
                 :rules="[rules.required]"
@@ -117,9 +117,9 @@
             </v-col>
             <v-col cols="5">
               <v-text-field
-                v-model="otherCourseDescription"
+                v-model="formData.otherCourseDescription"
                 label="Course"
-                v-if="course === 'Other'"
+                v-if="formData.course === 'Other'"
                 :disabled="sendingForm"
               ></v-text-field>
             </v-col>
@@ -127,7 +127,13 @@
         </div>
         <div class="mt-8">
           <div class="text-h6 black--text">(Optional) Additional Notes/Comments</div>
-          <v-textarea outlined no-resize rows="4" :disabled="sendingForm"></v-textarea>
+          <v-textarea
+            v-model="formData.additionalNotes"
+            outlined
+            no-resize
+            rows="4"
+            :disabled="sendingForm"
+          ></v-textarea>
         </div>
       </v-card-text>
       <v-card-actions>
@@ -149,21 +155,25 @@ else axios.defaults.baseURL = 'http://localhost:8888/.netlify/functions'
 export default {
   data: () => ({
     valid: false,
-    student: {
-      firstname: '',
-      lastname: '',
-      age: '',
-      email: ''
+    formData: {
+      student: {
+        firstname: '',
+        lastname: '',
+        age: '',
+        email: ''
+      },
+      parent: {
+        firstname: '',
+        lastname: '',
+        email: ''
+      },
+      subject: '',
+      otherSubjectDescription: '',
+      course: '',
+      otherCourseDescription: '',
+      additionalNotes: ''
     },
-    parent: {
-      firstname: '',
-      lastname: '',
-      email: ''
-    },
-    subject: '',
     subjects: ['Math', 'Computer Science', 'Physics', 'Japanese', 'Other'],
-    otherSubjectDescription: '',
-    course: '',
     courses: {
       math: ['Algebra', 'Geometry', 'Calculus', 'Other'],
       computerScience: ['Programming', 'Theory', 'Other'],
@@ -171,7 +181,6 @@ export default {
       japanese: ['Beginner', 'Intermediate', 'Other'],
       other: ['Other']
     },
-    otherCourseDescription: '',
     rules: {
       required: true,
       requiredIfUnder18: true,
@@ -184,7 +193,7 @@ export default {
   }),
   computed: {
     coursesBySubject: function () {
-      var noSpaceSubjectName = this.subject.replace(' ', '')
+      var noSpaceSubjectName = this.formData.subject.replace(' ', '')
       if (noSpaceSubjectName) {
         var camelcaseSubjectName = noSpaceSubjectName[0].toLowerCase() + noSpaceSubjectName.substring(1)
         return this.courses[camelcaseSubjectName]
@@ -195,19 +204,19 @@ export default {
   },
   methods: {
     setCourse: function () {
-      if (this.subject === 'Other') this.course = 'Other'
-      else this.course = null
+      if (this.formData.subject === 'Other') this.formData.course = 'Other'
+      else this.formData.course = null
     },
     activateRules() {
       this.rules.required = (v) => !!v || 'Required'
-      this.rules.requiredIfUnder18 = (v) => parseInt(this.student.age) >= 18 || !!v || 'Required'
+      this.rules.requiredIfUnder18 = (v) => parseInt(this.formData.student.age) >= 18 || !!v || 'Required'
       this.rules.email = (v) => {
         const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         return pattern.test(v) || 'Invalid e-mail'
       }
       this.rules.emailIfUnder18 = (v) => {
         const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        return parseInt(this.student.age) >= 18 || pattern.test(v) || 'Invalid e-mail'
+        return parseInt(this.formData.student.age) >= 18 || pattern.test(v) || 'Invalid e-mail'
       }
       this.rules.ageRange = (v) => {
         return (parseInt(v) >= 10 && parseInt(v) <= 120) || 'Invalid age'
@@ -220,12 +229,10 @@ export default {
           this.sendingForm = true
           this.showSubmitError = false
           axios
-            .post('/send-email', {
-              some: 'value',
-              lives: 'here'
-            })
+            .post('/send-email', this.formData)
             .then((response) => {
               console.log(response)
+              this.sendingForm = false
             })
             .catch((error) => {
               this.sendingForm = false
