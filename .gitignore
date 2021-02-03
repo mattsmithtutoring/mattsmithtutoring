@@ -22,3 +22,9 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Netlify API Token file (read by Vagrantfile)
+netlify_auth_token
+
+# Local Netlify folder
+.netlify
