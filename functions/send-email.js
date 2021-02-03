@@ -1,9 +1,9 @@
-// const sendgrid = require('@sendgrid/mail')
+const sendgrid = require('@sendgrid/mail')
 const { SENDGRID_API_KEY, SENDGRID_TO_EMAIL, SENDGRID_FROM_EMAIL } = process.env
 
 exports.handler = async function (event, context, callback) {
   const formData = JSON.parse(event.body)
-  // sendgrid.setApiKey(SENDGRID_API_KEY)
+  sendgrid.setApiKey(SENDGRID_API_KEY)
 
   const data = {
     to: SENDGRID_TO_EMAIL,
@@ -38,24 +38,18 @@ Additional Notes/Comments:
 `
   }
 
-  return {
-    statusCode: 200,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ hello: 'world', apikey: SENDGRID_API_KEY, email: SENDGRID_TO_EMAIL })
+  try {
+    await sendgrid.send(data)
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ success: true })
+    }
+  } catch (error) {
+    return {
+      statusCode: error.code,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ success: false, error: error.message })
+    }
   }
-
-  // try {
-  //   await sendgrid.send(data)
-  //   return {
-  //     statusCode: 200,
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ success: true })
-  //   }
-  // } catch (error) {
-  //   return {
-  //     statusCode: error.code,
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ success: false, error: error.message })
-  //   }
-  // }
 }
