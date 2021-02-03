@@ -39,7 +39,14 @@ Vagrant.configure("2") do |config|
       yarn global add netlify-cli
 
       # Add /home/vagrant/.yarn/bin to PATH (where netlify-cli is installed)
-      echo -e '\nexport PATH="$(yarn global bin):$PATH"' >> /home/vagrant/.profile 
+      echo -e '\nexport PATH="$(yarn global bin):$PATH"' >> /home/vagrant/.profile
+
+      # Set NETLIFY_AUTH_TOKEN environment variable based on netlify_auth_token file
+      echo -e '\nsource /mattsmithtutoring/netlify_auth_token' >> /home/vagrant/.profile
+      echo -e '\nexport NETLIFY_AUTH_TOKEN' >> /home/vagrant/.profile
+
+      # Start in /mattsmithtutoring
+      echo -e '\ncd /mattsmithtutoring' >> /home/vagrant/.profile
     SHELL
   end
 end
