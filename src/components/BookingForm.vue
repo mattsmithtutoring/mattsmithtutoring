@@ -1,6 +1,6 @@
 <template>
   <v-form v-model="valid" ref="form" @submit.prevent="sendForm" lazy-validation>
-    <v-card class="pa-8">
+    <v-card class="pa-md-8">
       <v-card-title>Inquiry Form</v-card-title>
       <v-card-subtitle>
         Please submit the below information and I will get back to you within 24 hours by email. The first lesson is
@@ -10,7 +10,7 @@
         <div class="mb-8">
           <div class="text-h6 black--text">Student Information</div>
           <v-row>
-            <v-col cols="5">
+            <v-col cols="12" sm="10" md="5">
               <v-text-field
                 v-model="formData.student.firstname"
                 label="First name"
@@ -18,7 +18,7 @@
                 :disabled="sendingForm"
               ></v-text-field>
             </v-col>
-            <v-col cols="5">
+            <v-col cols="12" sm="10" md="5" v-if="$vuetify.breakpoint.mdAndUp">
               <v-text-field
                 v-model="formData.student.lastname"
                 label="Last name"
@@ -26,7 +26,31 @@
                 :disabled="sendingForm"
               ></v-text-field>
             </v-col>
-            <v-col cols="2">
+            <v-col cols="6" sm="4" md="2" v-if="$vuetify.breakpoint.mdAndUp">
+              <v-text-field
+                v-model="formData.student.age"
+                label="Age"
+                maxlength="3"
+                type="number"
+                min="10"
+                max="120"
+                :rules="[rules.required, rules.ageRange]"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row v-if="$vuetify.breakpoint.smAndDown">
+            <v-col cols="12" sm="10" md="5">
+              <v-text-field
+                v-model="formData.student.lastname"
+                label="Last name"
+                :rules="[rules.required]"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row v-if="$vuetify.breakpoint.smAndDown">
+            <v-col cols="6" sm="4" md="2">
               <v-text-field
                 v-model="formData.student.age"
                 label="Age"
@@ -40,7 +64,7 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="5">
+            <v-col cols="12" sm="10" md="5">
               <v-text-field
                 v-model="formData.student.email"
                 label="Email Address"
@@ -54,7 +78,7 @@
           <div class="text-h6 black--text">Parent/Gardian Information</div>
           <div class="text-subtitle-2">Required if student is under 18 years old</div>
           <v-row>
-            <v-col cols="5">
+            <v-col cols="12" sm="10" md="5">
               <v-text-field
                 v-model="formData.parent.firstname"
                 label="First name"
@@ -62,7 +86,17 @@
                 :disabled="sendingForm"
               ></v-text-field>
             </v-col>
-            <v-col cols="5">
+            <v-col cols="12" sm="10" md="5" v-if="$vuetify.breakpoint.mdAndUp">
+              <v-text-field
+                v-model="formData.parent.lastname"
+                label="Last name"
+                :rules="[rules.requiredIfUnder18]"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row v-if="$vuetify.breakpoint.smAndDown">
+            <v-col cols="12" sm="10" md="5">
               <v-text-field
                 v-model="formData.parent.lastname"
                 label="Last name"
@@ -72,7 +106,7 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="5">
+            <v-col cols="12" sm="10" md="5">
               <v-text-field
                 v-model="formData.parent.email"
                 label="Email Address"
@@ -85,7 +119,7 @@
         <div class="mt-8">
           <div class="text-h6 black--text">Subject</div>
           <v-row>
-            <v-col cols="5">
+            <v-col cols="12" sm="10" md="5">
               <v-select
                 v-model="formData.subject"
                 :items="subjects"
@@ -95,7 +129,17 @@
                 :disabled="sendingForm"
               ></v-select>
             </v-col>
-            <v-col cols="5">
+            <v-col cols="12" sm="10" md="5" v-if="$vuetify.breakpoint.mdAndUp">
+              <v-text-field
+                v-model="formData.otherSubjectDescription"
+                label="Subject"
+                v-if="formData.subject === 'Other'"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row v-if="$vuetify.breakpoint.smAndDown">
+            <v-col cols="12" sm="10" md="5">
               <v-text-field
                 v-model="formData.otherSubjectDescription"
                 label="Subject"
@@ -105,17 +149,26 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="5">
+            <v-col cols="12" sm="10" md="5">
               <v-select
                 v-model="formData.course"
                 :items="coursesBySubject"
                 label="Course"
                 :rules="[rules.required]"
-                v-if="coursesBySubject"
-                :disabled="sendingForm"
+                :disabled="coursesBySubject[0] === 'empty' || sendingForm"
               ></v-select>
             </v-col>
-            <v-col cols="5">
+            <v-col cols="12" sm="10" md="5" v-if="$vuetify.breakpoint.mdAndUp">
+              <v-text-field
+                v-model="formData.otherCourseDescription"
+                label="Course"
+                v-if="formData.course === 'Other'"
+                :disabled="sendingForm"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row v-if="$vuetify.breakpoint.smAndDown">
+            <v-col cols="12" sm="10" md="5">
               <v-text-field
                 v-model="formData.otherCourseDescription"
                 label="Course"
@@ -198,7 +251,7 @@ export default {
         var camelcaseSubjectName = noSpaceSubjectName[0].toLowerCase() + noSpaceSubjectName.substring(1)
         return this.courses[camelcaseSubjectName]
       } else {
-        return null
+        return ['empty']
       }
     }
   },
