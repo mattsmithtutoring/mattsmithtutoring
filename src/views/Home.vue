@@ -169,6 +169,8 @@
 </template>
 
 <script>
+import bodyScroll from 'body-scroll-toggle'
+
 import Blurb from '../components/Blurb.vue'
 import McsHeader from '../components/McsHeader.vue'
 import Splash from '../components/Splash.vue'
@@ -187,6 +189,12 @@ export default {
   data: () => ({
     dialog: false
   }),
+  watch: {
+    dialog: function () {
+      if (this.dialog) bodyScroll.disable()
+      else bodyScroll.enable()
+    }
+  },
   name: 'Home'
 }
 </script>
