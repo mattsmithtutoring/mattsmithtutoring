@@ -49,7 +49,11 @@
             </tutor-subject>
           </v-col>
           <v-col cols="12" sm="6" lg="3">
-            <tutor-subject subject="Computer Science" color="item2">
+            <tutor-subject
+              subject="Computer
+            Science"
+              color="item2"
+            >
               Both programming and college-level theory. Experienced in the following languages:
               <ul>
                 <li>Java (used in AP Computer Science A)</li>
@@ -195,3 +199,15 @@ export default {
   name: 'Home'
 }
 </script>
+
+<style>
+@media (min-width: 1904px) {
+  .container {
+    max-width: 1185px;
+  }
+}
+
+.container--fluid {
+  max-width: 100%;
+}
+</style>
