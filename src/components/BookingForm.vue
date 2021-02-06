@@ -1,12 +1,16 @@
 <template>
   <v-form v-model="valid" ref="form" @submit.prevent="sendForm" lazy-validation>
     <v-card class="pa-md-8">
-      <v-card-title>Inquiry Form</v-card-title>
-      <v-card-subtitle>
+      <v-card-title class="success--text" v-if="showSuccessMessage">Success!</v-card-title>
+      <v-card-title v-else>Inquiry Form</v-card-title>
+      <v-card-subtitle v-if="showSuccessMessage">
+        Thank you for your inquiry! I'll reach out within 24 hours to set up our first lesson.
+      </v-card-subtitle>
+      <v-card-subtitle v-else>
         Please submit the below information and I will get back to you within 24 hours by email. The first lesson is
         free!
       </v-card-subtitle>
-      <v-card-text>
+      <v-card-text v-if="!showSuccessMessage">
         <div class="mb-8">
           <div class="text-h6 black--text">Student Information</div>
           <v-row>
@@ -75,7 +79,7 @@
           </v-row>
         </div>
         <div class="my-8">
-          <div class="text-h6 black--text">Parent/Gardian Information</div>
+          <div class="text-h6 black--text">Parent/Guardian Information</div>
           <div class="text-subtitle-2">Required if student is under 18 years old</div>
           <v-row>
             <v-col cols="12" sm="10" md="5">
@@ -190,8 +194,13 @@
         </div>
       </v-card-text>
       <v-card-actions>
-        <v-btn class="primary" type="submit" :disabled="sendingForm" :loading="sendingForm">Submit</v-btn>
-        <v-btn class="secondary" @click="$emit('closeDialog')" :disabled="sendingForm">Cancel</v-btn>
+        <v-btn class="primary" @click="$emit('closeDialog')" v-if="showSuccessMessage">OK</v-btn>
+        <v-btn class="primary" type="submit" :disabled="sendingForm" :loading="sendingForm" v-if="!showSuccessMessage">
+          Submit
+        </v-btn>
+        <v-btn class="secondary" @click="$emit('closeDialog')" :disabled="sendingForm" v-if="!showSuccessMessage">
+          Cancel
+        </v-btn>
         <div class="error--text pl-4" v-if="showSubmitError">
           There was an error submitting the form. Please contact me directly at mattsmith@mattsmithtutoring.com.
         </div>
@@ -242,7 +251,8 @@ export default {
       ageRange: true
     },
     sendingForm: false,
-    showSubmitError: false
+    showSubmitError: false,
+    showSuccessMessage: false
   }),
   computed: {
     coursesBySubject: function () {
@@ -285,6 +295,8 @@ export default {
             .post('/send-email', this.formData)
             .then((response) => {
               console.log(response)
+              this.$refs.form.reset()
+              this.showSuccessMessage = true
               this.sendingForm = false
             })
             .catch((error) => {
@@ -292,7 +304,6 @@ export default {
               this.showSubmitError = true
               console.log(error)
             })
-          // TODO: Set up Axios with API call to Netlify function at /.netlify/functions/send-email
         }
       })
     }
