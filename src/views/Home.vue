@@ -132,9 +132,8 @@
           <v-col cols="12" class="dark text-center text-body-1 text-md-h6">
             Tutoring is most effective when done on a regular basis. The repeated act of embracing challenges in a safe
             environment helps to build confidence with the subject and overcome the fear of failure. Each of these
-            enhances the other in a feedback loop I call the
-            <span class="font-weight-bold">Tutoring Cycle</span>
-            . Altogether, the cycle helps us reach the ultimate goal of sharpening the mind overall and sets us up to be
+            enhances the other in a feedback loop I call the <span class="font-weight-bold">Tutoring Cycle</span>.
+            Altogether, the cycle helps us reach the ultimate goal of sharpening the mind overall and sets us up to be
             successful in any challenges we face (which, naturally, will also lead to better grades in school).
           </v-col>
         </v-row>
