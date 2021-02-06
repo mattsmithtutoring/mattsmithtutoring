@@ -15,7 +15,7 @@
           your grades.
         </div>
       </v-container>
-      <v-container v-if="$vuetify.breakpoint.md">
+      <v-container v-if="$vuetify.breakpoint.mdAndUp">
         <div class="elevation-12 mx-8 px-8 py-4" style="background: rgba(96, 125, 139, 0.7)">
           <div
             class="ml-n8"
@@ -35,9 +35,15 @@
               ></path>
             </svg>
           </div>
-          <v-carousel height="10rem" show-arrows-on-hover hide-delimiters cycle>
+          <v-carousel
+            height="10rem"
+            :show-arrows="testimonials.length > 1"
+            :show-arrows-on-hover="testimonials.length > 1"
+            hide-delimiters
+            cycle
+          >
             <v-carousel-item
-              class="text-h5 text-lg-h4 font-weight-bold white--text px-24"
+              class="text-h5 font-weight-bold white--text px-24"
               v-for="testimonial in testimonials"
               :key="testimonial.text"
               transition="fade-transition"
@@ -48,7 +54,7 @@
                   {{ testimonial.text }}
                 </div>
                 <div class="d-flex align-end justify-end" style="position: absolute; width: 100%; height: 100%">
-                  - {{ testimonial.attribution }}
+                  - {{ testimonial.attribution }}, {{ testimonial.class }}
                 </div>
               </div>
             </v-carousel-item>
@@ -69,12 +75,9 @@ export default {
     testimonials: [
       {
         text:
-          'Learn to embrace the challenge, build confidence, overcome the fear, and sharpen the mind all while improving your grades.',
-        attribution: 'M. Smith'
-      },
-      {
-        text: 'Some other testimonial.',
-        attribution: 'I. Haveareallyfrickinlongname'
+          'I started off by dropping my first semester of Calc 2 and ended up finishing this semester with an 89% in the class, all thanks to Mr. Smith. If you are struggling with a math class, look no further because you have found the guy to help you!',
+        attribution: 'Tom C.',
+        class: 'College-level Calculus 2'
       }
     ]
   }),
