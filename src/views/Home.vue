@@ -3,7 +3,7 @@
     <v-app-bar app dark color="secondary">
       <v-toolbar-title>Matt Smith Tutoring</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" width="900" persistent scrollable>
+      <v-dialog v-model="dialog" width="900" persistent>
         <template v-slot:activator="{ on, attrs }">
           <v-btn color="primary" v-bind="attrs" v-on="on">BOOK NOW</v-btn>
         </template>
@@ -16,10 +16,10 @@
         <mcs-header>About Me</mcs-header>
         <v-row>
           <v-col cols="12" class="dark text-center text-body-1 text-md-h6">
-            Hi! I'm Mr. Smith, a Princeton University-trained mathematician and certified math teacher who helps
-            students reach their full potential in the subjects they struggle with the most. My approach is analytical:
-            break down a problem, whether it be solving an equation or translating a sentence, into pieces and build on
-            the fundamentals to piece the solution together.
+            Hi! I'm a Princeton University-trained mathematician and certified math teacher who helps students reach
+            their full potential in the subjects they struggle with the most. My approach is analytical: break down a
+            problem, whether it be solving an equation or translating a sentence, into pieces and build on the
+            fundamentals to piece the solution together.
             <br />
             <br />
             I'll meet you where you're at and help you reach where you need to be. Through consistent effort, you'll
@@ -154,7 +154,9 @@
         </v-row>
         <v-row>
           <v-col cols="6" offset="3">
-            <v-btn block x-large dark color="primary" width="100%" class="text-h6">BOOK NOW</v-btn>
+            <v-btn block x-large dark color="primary" width="100%" class="text-h6" @click="dialog = true">
+              BOOK NOW
+            </v-btn>
           </v-col>
         </v-row>
       </v-container>
