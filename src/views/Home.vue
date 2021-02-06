@@ -11,7 +11,7 @@
       </v-dialog>
     </v-app-bar>
     <splash></splash>
-    <div class="primary lighten-5">
+    <div class="primary lighten-5 py-8">
       <v-container>
         <mcs-header>About Me</mcs-header>
         <v-row>
@@ -29,7 +29,7 @@
         </v-row>
       </v-container>
     </div>
-    <div class="primary lighten-4">
+    <div class="primary lighten-4 py-8">
       <v-container>
         <mcs-header>Subjects I Tutor</mcs-header>
         <v-row class="pt-2">
@@ -92,7 +92,7 @@
         </v-row>
       </v-container>
     </div>
-    <div class="primary lighten-3">
+    <div class="primary lighten-5 py-8">
       <v-container>
         <mcs-header>My Philosophy</mcs-header>
         <v-row>
@@ -129,7 +129,7 @@
         </blurb>
       </v-container>
     </div>
-    <div class="primary lighten-2 pb-8">
+    <div class="primary lighten-4 py-8">
       <v-container>
         <mcs-header>The Tutoring Cycle</mcs-header>
         <v-row>
@@ -144,7 +144,7 @@
         <tutor-cycle></tutor-cycle>
       </v-container>
     </div>
-    <div class="accent lighten-5">
+    <div class="accent lighten-4">
       <v-container>
         <v-row>
           <v-col cols="12" sm="10" offset-sm="1" md="8" offset-md="2" class="dark text-center text-h5 text-md-h4">

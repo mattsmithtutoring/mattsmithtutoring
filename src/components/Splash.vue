@@ -36,7 +36,7 @@
             </svg>
           </div>
           <v-carousel
-            height="10rem"
+            height="12rem"
             :show-arrows="testimonials.length > 1"
             :show-arrows-on-hover="testimonials.length > 1"
             hide-delimiters
