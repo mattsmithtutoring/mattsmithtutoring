@@ -1,5 +1,5 @@
 <template>
-  <div id="app" data-server-rendered="true">
+  <div id="app">
     <v-app>
       <v-main transition="slide-x-transition">
         <router-view></router-view>
