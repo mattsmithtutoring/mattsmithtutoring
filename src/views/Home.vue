@@ -162,7 +162,7 @@
     </div>
     <v-footer color="secondary" dark class="text-caption text-md-body-1">
       Contact me:
-      <a href="#" class="white--text pl-2">mattsmith@mattsmithtutoring.com</a>
+      <a href="mailto:mattsmith@mattsmithtutoring.com" class="white--text pl-2">mattsmith@mattsmithtutoring.com</a>
       <v-spacer></v-spacer>
       &copy; 2021 Matt Smith Tutoring
     </v-footer>
