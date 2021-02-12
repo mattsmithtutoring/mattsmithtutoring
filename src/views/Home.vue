@@ -3,7 +3,7 @@
     <v-app-bar app dark color="secondary">
       <v-toolbar-title>Matt Smith Tutoring</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" width="900" persistent>
+      <v-dialog v-model="dialog" width="900">
         <template v-slot:activator="{ on, attrs }">
           <v-btn color="primary" v-bind="attrs" v-on="on">BOOK NOW</v-btn>
         </template>
