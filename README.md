@@ -1,4 +1,4 @@
-# mattsmithtutoring
+# Matt Smith Tutoring
 
 My tutoring website.
 
