@@ -1,10 +1,4 @@
-# Matt Smith Tutoring Website
-
-My tutoring website.
-
-## Description
-
-This is the code for my tutoring website, <https://mattsmithtutoring.com>. It is a static site written in Vue and uses Vuetify for formatting and components. It is hosted on [Netlify](https://www.netlify.com/).
+# mattsmithtutoring
 
 ## Set up the development environment
 
