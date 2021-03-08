@@ -1,5 +1,11 @@
 # mattsmithtutoring
 
+My tutoring website.
+
+## Description
+
+This is the code for my tutoring website, <https://mattsmithtutoring.com>. It is a static site written in Vue and uses Vuetify for formatting and components. It is hosted on [Netlify](https://www.netlify.com/).
+
 ## Set up the development environment
 
 I use [Vagrant](https://www.vagrantup.com/) to run a local VM for my dev environment. Vagrant requires a backend VM software; I recommend [VirtualBox](https://www.virtualbox.org/). Follow these steps to set up the dev environment:
