@@ -3,12 +3,7 @@
     <v-app-bar app dark color="secondary">
       <v-toolbar-title>Matt Smith Tutoring</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" width="900">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" v-bind="attrs" v-on="on">BOOK NOW</v-btn>
-        </template>
-        <booking-form @closeDialog="dialog = false"></booking-form>
-      </v-dialog>
+      <v-btn color="primary" href="mailto:mattsmith@mattsmithtutoring.com">EMAIL ME</v-btn>
     </v-app-bar>
     <splash></splash>
     <div class="primary lighten-5 py-8">
@@ -153,8 +148,8 @@
         </v-row>
         <v-row>
           <v-col cols="6" offset="3">
-            <v-btn block x-large dark color="primary" width="100%" class="text-h6" @click="dialog = true">
-              BOOK NOW
+            <v-btn block x-large dark color="primary" width="100%" class="text-h6" href="mailto:mattsmith@mattsmithtutoring.com">
+              EMAIL ME
             </v-btn>
           </v-col>
         </v-row>
@@ -177,15 +172,13 @@ import McsHeader from '../components/McsHeader.vue'
 import Splash from '../components/Splash.vue'
 import TutorCycle from '../components/TutorCycle.vue'
 import TutorSubject from '../components/TutorSubject.vue'
-import BookingForm from '../components/BookingForm.vue'
 export default {
   components: {
     Blurb,
     McsHeader,
     Splash,
     TutorCycle,
-    TutorSubject,
-    BookingForm
+    TutorSubject
   },
   data: () => ({
     dialog: false
